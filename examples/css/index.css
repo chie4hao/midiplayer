@@ -1,0 +1,17 @@
+#animate {
+    position: absolute;
+    display: none;
+    z-index: 19999;
+}
+
+#background {
+    position: absolute;
+    display: none;
+    top: 50px;
+    z-index: 9999;
+}
+
+#asdf {
+    position: absolute;
+    height: 2000px;
+}
