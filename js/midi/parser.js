@@ -64,6 +64,7 @@ MIDI.sendSignal = function (x, y) {
         }, time);
     }
 }
+
 MIDI.masterVolume = 127;
 MIDI.playTime = 0;
 MIDI.beginTime = 0;
@@ -116,7 +117,7 @@ MIDI.noteOff = function (instrument, noteId, delay) {
     }
 }
 MIDI.stopAllNotes = function () {
-    for (i = 0; i <= 110; i++) {
+    for (var i = 0; i <= 110; i++) {
         MIDI.noteOff('acoustic_grand_piano', i, 0.3)
     }
 }
