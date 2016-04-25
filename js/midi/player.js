@@ -4,15 +4,16 @@
 
 
 var MIDIPlayer = function (midiTracks) {
-    this.temporal=midiTracks.temporal;
-    this.playTime=ctx.currentTime;
-    this.beginTime=this.playTime+1;
+    this.temporal = midiTracks.temporal;
+    this.playTime = ctx.currentTime;
+    this.beginTime = this.playTime;
     this.masterVolume = 127;
     this.sources = {};
+    MIDIPlayer.currentPlayer.push(this);
 }
 
 MIDIPlayer.prototype.sendSignal = function (x, y) {
-    var current=this;
+    var current = this;
     for (var i = x; i < this.temporal.length && i < x + y; i++) {
         switch (this.temporal[i][0].subtype) {
             case 'noteOn':
@@ -24,7 +25,7 @@ MIDIPlayer.prototype.sendSignal = function (x, y) {
         }
     }
 
-    if ((x + y) <this.temporal.length) {
+    if ((x + y) < this.temporal.length) {
         var time = (this.temporal[(x + y)][1] - ctx.currentTime + this.beginTime) * 1000 - 500;
         this.currentTimeout = setTimeout(function () {
             current.playTime = ctx.currentTime;
@@ -33,7 +34,7 @@ MIDIPlayer.prototype.sendSignal = function (x, y) {
     }
 }
 
-MIDIPlayer.prototype.noteOn=function (instrument, noteId, velocity, delay) {
+MIDIPlayer.prototype.noteOn = function (instrument, noteId, velocity, delay) {
     var source = ctx.createBufferSource();
     source.buffer = audioBuffers[instrument + ' ' + noteId];
     var ouput = ctx.createGain();
@@ -81,12 +82,31 @@ MIDIPlayer.prototype.noteOff = function (instrument, noteId, delay) {
         }
     }
 }
+
 MIDIPlayer.prototype.stopAllNotes = function () {
-    for (var i = 0; i <= 110; i++) {
-        this.noteOff('acoustic_grand_piano', i, 0.3)
+    for (var a in this.sources) {
+        console.log(this.sources)
+        console.log(a)
+        var source = this.sources[a];
+        if (source && source.gain) {
+            var gain = source.gain.gain;
+            gain.linearRampToValueAtTime(gain.value, 0);
+            gain.linearRampToValueAtTime(0, 0 + 0.3);
+            delete source;
+        }
     }
 }
 
+MIDIPlayer.currentPlayer = [];
+
+MIDIPlayer.clearPlayer = function () {
+    MIDIPlayer.currentPlayer.forEach(function (a) {
+        clearTimeout(a.currentTimeout)
+        //静音
+        a.stopAllNotes();
+    });
+    MIDIPlayer.currentPlayer = [];
+}
 
 var ctx = new window.AudioContext();
 var soundFont;
