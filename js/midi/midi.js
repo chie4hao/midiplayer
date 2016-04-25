@@ -84,7 +84,8 @@ MIDI.prototype = {
     }
 };
 
-var lastEventTypeByte;
+
+MIDI.lastEventTypeByte;
 
 MIDI.readEvent = function (stream) {
     var event = {};
@@ -205,14 +206,12 @@ MIDI.readEvent = function (stream) {
         /* channel event */
         var param1;
         if ((eventTypeByte & 0x80) == 0) {
-            /* running status - reuse lastEventTypeByte as the event type.
-             eventTypeByte is actually the first parameter
-             */
+
             param1 = eventTypeByte;
-            eventTypeByte = lastEventTypeByte;
+            eventTypeByte = MIDI.lastEventTypeByte;
         } else {
             param1 = stream.readInt8();
-            lastEventTypeByte = eventTypeByte;
+            MIDI.lastEventTypeByte = eventTypeByte;
         }
         var eventType = eventTypeByte >> 4;
         event.channel = eventTypeByte & 0x0f;

@@ -21,12 +21,6 @@
     </form>
 </div>
 <script type="text/javascript">
-    /*var ctx2, ctx1;
-     var keystate = [false, false, false, false, false, false, false]
-     var sevenkeyarray = [83, 68, 70, 32, 74, 75, 76];
-     var lastTime = 0;
-     var animateInterval;
-     */
     window.onload = function () {
         var canvas = document.getElementById('animate');
         var canvas1 = document.getElementById('background')
@@ -40,112 +34,11 @@
             MIDIPlayer.clearPlayer();
 
             loadMidiFile(this.files[0], function (midiTracks) {
-                loadSondFont('acoustic_grand_piano', function () {
-                    var asdf = new MIDIPlayer(midiTracks);
-                    asdf.sendSignal(0, 5)
-                });
+                var asdf = new MIDIPlayer(midiTracks);
+                asdf.sendSignal(0)
             })
         });
     }
-    /*
-     MIDI.firstSignal = true;
-     clearTimeout(MIDI.currentTimeout);
-     clearInterval(animateInterval);
-     readBlobAsDataURL(this.files[0], function (x) {
-     console.log(x)
-     loadMidiFile(x, function () {
-     loadSondFont('acoustic_grand_piano', function () {
-     MIDI.playTime = ctx.currentTime;
-     MIDI.beginTime = MIDI.playTime + 1;
-     MIDI.sendSignal(0, 5);
-     animateInterval = setInterval(function () {
-     noteAnimate(((ctx.currentTime + lastTime) / 2 - MIDI.beginTime) * 1000 - 30)
-     lastTime = ctx.currentTime;
-     }, 1000 / 60);
-     });
-     })
-     })
-     */
-
-
-    /*
-     window.addEventListener('keydown', function (event) {
-     event.preventDefault();
-     event.stopPropagation();
-     var i = sevenkeyarray.indexOf(event.keyCode)
-     if (keystate[i] == false && i != -1) {
-     for (var k = MIDI.currentSevenKeyPosition.misskey[0]; MIDI.sevenkey[k].state != 6; k++) {
-     if (MIDI.sevenkey[k].note == i && MIDI.sevenkey[k].show == true) {
-     MIDI.sevenkey[k].show = false;
-     if (MIDI.sevenkey[k].state == 1 || MIDI.sevenkey[k].state == 5) {
-     MIDI.grade.bad++;
-     MIDI.grade.combo = 0;
-     }
-     else if (MIDI.sevenkey[k].state == 2 || MIDI.sevenkey[k].state == 4) {
-     MIDI.grade.good++;
-     MIDI.grade.combo++;
-     }
-     else if (MIDI.sevenkey[k].state == 3) {
-     MIDI.grade.great++;
-     MIDI.grade.combo++;
-     }
-     break;
-     }
-     }
-     }
-     keystate[i] = true;
-     });
-     window.addEventListener('keyup', function (event) {
-     var i = sevenkeyarray.indexOf(event.keyCode)
-     if (i != -1)
-     keystate[i] = false;
-     event.preventDefault();
-     event.stopPropagation();
-     })
-     var noteAnimate = function (currentTime) {
-     var ratio = 1;   // time/length
-     var time = 600 / ratio;
-     ctx2.clearRect(0, 0, 245, 600);
-     for (var i = MIDI.currentSevenKeyPosition.misskey[0]; i < MIDI.sevenkey.length && MIDI.sevenkey[i].time <= (currentTime + time); i++) {
-     if (MIDI.sevenkey[i].time < (currentTime - 250 / ratio) && MIDI.sevenkey[i].state > 0) {
-     if (MIDI.sevenkey[i].show == true) {
-     MIDI.grade.miss++;
-     MIDI.grade.combo = 0;
-     }
-     MIDI.currentSevenKeyPosition.misskey[0]++;
-     MIDI.sevenkey[i].state = 0;
-     } else if (MIDI.sevenkey[i].time < (currentTime - 150 / ratio) && MIDI.sevenkey[i].state > 1) {
-     MIDI.sevenkey[i].state = 1;
-     } else if (MIDI.sevenkey[i].time < (currentTime - 100 / ratio) && MIDI.sevenkey[i].state > 2) {
-     MIDI.sevenkey[i].state = 2;
-     } else if (MIDI.sevenkey[i].time < (currentTime + 100 / ratio) && MIDI.sevenkey[i].state > 3) {
-     MIDI.sevenkey[i].state = 3;
-     } else if (MIDI.sevenkey[i].time < (currentTime + 150 / ratio) && MIDI.sevenkey[i].state > 4) {
-     MIDI.sevenkey[i].state = 4;
-     } else if (MIDI.sevenkey[i].time < (currentTime + 250 / ratio) && MIDI.sevenkey[i].state > 5) {
-     MIDI.sevenkey[i].state = 5;
-     }
-
-     if (MIDI.sevenkey[i].time >= currentTime && MIDI.sevenkey[i].show == true) {
-     var k = MIDI.sevenkey[i].note;
-     if (k == 1 || k == 5) {
-     ctx2.fillStyle = "blue";
-     } else if (k == 3) {
-     ctx2.fillStyle = "yellow";
-     } else {
-     ctx2.fillStyle = "#CCCCCC";
-     }
-     ctx2.fillRect((MIDI.sevenkey[i].note ) * 35, 600 - (MIDI.sevenkey[i].time - currentTime) * ratio, 30, 5);
-     }
-     }
-     ctx2.fillStyle = "red";
-     ctx2.font = "20px Georgia";
-     ctx2.fillText("great" + MIDI.grade.great + " good" + MIDI.grade.good + " bad" + MIDI.grade.bad, 10, 50);
-     ctx2.fillText("miss" + MIDI.grade.miss, 10, 80)
-     ctx2.font = "40px Georgia";
-     if (MIDI.grade.combo > 3) ctx2.fillText(MIDI.grade.combo, 110, 260)
-     };
-     */
 </script>
 </body>
 </html>

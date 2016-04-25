@@ -13,6 +13,7 @@ var MIDIPlayer = function (midiTracks) {
 }
 
 MIDIPlayer.prototype.sendSignal = function (x, y) {
+    y = y || 5;
     var current = this;
     for (var i = x; i < this.temporal.length && i < x + y; i++) {
         switch (this.temporal[i][0].subtype) {

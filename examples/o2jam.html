@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/o2jam.css" rel="stylesheet" type="text/css"/>
+
+    <script src="../js/midi/midi.js"></script>
+
+    <script src="../js/midi/stream.js"></script>
+    <script src="../js/midi/player.js"></script>
+    <script src="../js/midi/loader.js"></script>
+    <script src="../js/midi/O2jam.js"></script>
+    <script src="../js/soundfont/acoustic_grand_piano-mp3.js"></script>
+</head>
+<body>
+<canvas id="animate" width="240px" height="600px"></canvas>
+<canvas id="background" width="240px" height="600px"></canvas>
+<div id="asdf" width="250px" height="2000px">
+    <form>
+        <input type="file" id="uploadfile"><br>
+    </form>
+</div>
+<script type="text/javascript">
+    var ctx2, ctx1;
+    var keystate = [false, false, false, false, false, false, false]
+    var sevenkeyarray = [83, 68, 70, 32, 74, 75, 76];
+    var lastTime = 0;
+    var animateInterval;
+    var O2jamArray;
+
+    window.onload = function () {
+        var canvas = document.getElementById('animate');
+        var canvas1 = document.getElementById('background')
+        ctx2 = canvas.getContext("2d");
+        ctx1 = canvas1.getContext("2d");
+        ctx1.fillStyle = "black";
+        ctx1.fillRect(0, 0, 440, 600);
+        document.getElementById("uploadfile").addEventListener("change", function () {
+
+            MIDIPlayer.clearPlayer();
+            clearInterval(animateInterval);
+
+            loadMidiFile(this.files[0], function (midiTracks) {
+                var asdf = new MIDIPlayer(midiTracks);
+                O2jamArray = new O2jam(midiTracks.temporal)
+                O2jamArray.toSevenkey();
+                asdf.sendSignal(0)
+                animateInterval = setInterval(function () {
+                    noteAnimate(((ctx.currentTime + lastTime) / 2 - asdf.beginTime) * 1000 - 30)
+                    lastTime = ctx.currentTime;
+                }, 1000 / 60);
+            })
+        });
+    }
+
+    window.addEventListener('keydown', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var i = sevenkeyarray.indexOf(event.keyCode)
+        if (keystate[i] == false && i != -1) {
+            for (var k = O2jamArray.currentSevenKeyPosition.misskey[0]; O2jamArray.sevenkey[k].state != 6; k++) {
+                if (O2jamArray.sevenkey[k].note == i && O2jamArray.sevenkey[k].show == true) {
+                    O2jamArray.sevenkey[k].show = false;
+                    if (O2jamArray.sevenkey[k].state == 1 || O2jamArray.sevenkey[k].state == 5) {
+                        O2jamArray.grade.bad++;
+                        O2jamArray.grade.combo = 0;
+                    }
+                    else if (O2jamArray.sevenkey[k].state == 2 || O2jamArray.sevenkey[k].state == 4) {
+                        O2jamArray.grade.good++;
+                        O2jamArray.grade.combo++;
+                    }
+                    else if (O2jamArray.sevenkey[k].state == 3) {
+                        O2jamArray.grade.great++;
+                        O2jamArray.grade.combo++;
+                    }
+                    break;
+                }
+            }
+        }
+        keystate[i] = true;
+    });
+    window.addEventListener('keyup', function (event) {
+        var i = sevenkeyarray.indexOf(event.keyCode)
+        if (i != -1)
+            keystate[i] = false;
+        event.preventDefault();
+        event.stopPropagation();
+    })
+    var noteAnimate = function (currentTime) {
+        var ratio = 1;   // time/length
+        var time = 600 / ratio;
+        ctx2.clearRect(0, 0, 245, 600);
+        for (var i = O2jamArray.currentSevenKeyPosition.misskey[0]; i < O2jamArray.sevenkey.length && O2jamArray.sevenkey[i].time <= (currentTime + time); i++) {
+            if (O2jamArray.sevenkey[i].time < (currentTime - 250 / ratio) && O2jamArray.sevenkey[i].state > 0) {
+                if (O2jamArray.sevenkey[i].show == true) {
+                    O2jamArray.grade.miss++;
+                    O2jamArray.grade.combo = 0;
+                }
+                O2jamArray.currentSevenKeyPosition.misskey[0]++;
+                O2jamArray.sevenkey[i].state = 0;
+            } else if (O2jamArray.sevenkey[i].time < (currentTime - 150 / ratio) && O2jamArray.sevenkey[i].state > 1) {
+                O2jamArray.sevenkey[i].state = 1;
+            } else if (O2jamArray.sevenkey[i].time < (currentTime - 100 / ratio) && O2jamArray.sevenkey[i].state > 2) {
+                O2jamArray.sevenkey[i].state = 2;
+            } else if (O2jamArray.sevenkey[i].time < (currentTime + 100 / ratio) && O2jamArray.sevenkey[i].state > 3) {
+                O2jamArray.sevenkey[i].state = 3;
+            } else if (O2jamArray.sevenkey[i].time < (currentTime + 150 / ratio) && O2jamArray.sevenkey[i].state > 4) {
+                O2jamArray.sevenkey[i].state = 4;
+            } else if (O2jamArray.sevenkey[i].time < (currentTime + 250 / ratio) && O2jamArray.sevenkey[i].state > 5) {
+                O2jamArray.sevenkey[i].state = 5;
+            }
+
+            if (O2jamArray.sevenkey[i].time >= currentTime && O2jamArray.sevenkey[i].show == true) {
+                var k = O2jamArray.sevenkey[i].note;
+                if (k == 1 || k == 5) {
+                    ctx2.fillStyle = "blue";
+                } else if (k == 3) {
+                    ctx2.fillStyle = "yellow";
+                } else {
+                    ctx2.fillStyle = "#CCCCCC";
+                }
+                ctx2.fillRect((O2jamArray.sevenkey[i].note ) * 35, 600 - (O2jamArray.sevenkey[i].time - currentTime) * ratio, 30, 5);
+            }
+        }
+        ctx2.fillStyle = "red";
+        ctx2.font = "20px Georgia";
+        ctx2.fillText("great" + O2jamArray.grade.great + " good" + O2jamArray.grade.good + " bad" + O2jamArray.grade.bad, 10, 50);
+        ctx2.fillText("miss" + O2jamArray.grade.miss, 10, 80)
+        ctx2.font = "40px Georgia";
+        if (O2jamArray.grade.combo > 3) ctx2.fillText(O2jamArray.grade.combo, 110, 260)
+    };
+
+</script>
+</body>
+</html>

@@ -1,14 +1,12 @@
 #animate {
     position: absolute;
     top:50px;
-    display: none;
     z-index: 19999;
 }
 
 #background {
     position: absolute;
     top: 50px;
-    display: none;
     z-index: 9999;
 }
 
