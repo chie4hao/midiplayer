@@ -8,6 +8,6 @@
 MIDIPlayer.clearPlayer();
 loadMidiFile(midiFile, function (midiTracks) {
   var asdf = new MIDIPlayer(midiTracks);
-  asdf.sendSignal(0)
+  asdf.sendSignal(0);
 });
 ```
