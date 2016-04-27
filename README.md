@@ -1,9 +1,12 @@
 # midiplayer
 
 ## API
+
++ midiFile — the ```File``` object
+
 ```javascript
 MIDIPlayer.clearPlayer();
-loadMidiFile(new File(/**/), function (midiTracks) {
+loadMidiFile(midiFile, function (midiTracks) {
   var asdf = new MIDIPlayer(midiTracks);
   asdf.sendSignal(0)
 })
