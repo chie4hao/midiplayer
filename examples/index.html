@@ -35,6 +35,7 @@
 
             loadMidiFile(this.files[0], function (midiTracks) {
                 var asdf = new MIDIPlayer(midiTracks);
+                //设定初始播放位置
                 asdf.sendSignal(0)
             })
         });

@@ -1,7 +1,9 @@
 /**
  * Created by chie on 2016/2/26.
  */
-var loadMidiFile = function (midiFile, callback) {
+
+loadMidiFile = function (midiFile, callback) {
+    if(midiFile.constructor.toString().indexOf('File')!=-1||midiFile.constructor.toString().indexOf('Blob')!=-1)
     readBlobAsDataURL(midiFile, function (dataurl) {
         loadMidiFile.midiTracks = new MIDI(dataurl);
         loadMidiFile.midiTracks.intoTracks();
@@ -19,5 +21,5 @@ var loadMidiFile = function (midiFile, callback) {
             callback(e.target.result);
         };
     }
-}
+};
 loadMidiFile.midiTracks={};

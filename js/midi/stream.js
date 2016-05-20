@@ -3,9 +3,9 @@
  */
 function Stream(str) {
     var position = 0;
-
+    
     function readWord(length) {
-
+        
         var str1=''
         for(var i=0;i<length;i++){
             str1+=String.fromCharCode(str[position+i])
@@ -17,7 +17,7 @@ function Stream(str) {
         position+=length;
         return str.slice(position-length,position)
     }
-
+    //读32位，以此类推
     function readInt32() {
         var result = (
         (str[position] << 24)
@@ -46,7 +46,7 @@ function Stream(str) {
     function eof() {
         return position >= str.length;
     }
-
+    //读变长
     function readVarInt() {
         var result = 0;
         while (true) {
