@@ -110,7 +110,7 @@ MIDIPlayer.clearPlayer = function () {
     MIDIPlayer.currentPlayer = [];
 }
 
-var ctx = new window.AudioContext();
+global.ctx = new window.AudioContext();
 var soundFont;
 var audioBuffers = {};
 var soundFontLength, decodeLength;
