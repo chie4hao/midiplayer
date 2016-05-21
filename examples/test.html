@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/index.css" rel="stylesheet" type="text/css"/>
+    <script src="../build/midi.js"></script>
+</head>
+<body>
+<canvas id="animate" width="240px" height="600px"></canvas>
+<canvas id="background" width="240px" height="600px"></canvas>
+<div id="asdf" width="250px" height="2000px">
+    <form>
+        <input type="file" id="uploadfile"><br>
+    </form>
+</div>
+<script type="text/javascript">
+    window.onload = function () {
+        var canvas = document.getElementById('animate');
+        var canvas1 = document.getElementById('background')
+        ctx2 = canvas.getContext("2d");
+        ctx1 = canvas1.getContext("2d");
+        ctx1.fillStyle = "black";
+        ctx1.fillRect(0, 0, 440, 600);
+        document.getElementById("uploadfile").addEventListener("change", function () {
+
+            //如需实现多轨播放，可将此行删去
+            MIDIPlayer.clearPlayer();
+
+            loadMidiFile(this.files[0], function (midiTracks) {
+                var asdf = new MIDIPlayer(midiTracks);
+                //设定初始播放位置
+                asdf.sendSignal(0)
+            })
+        });
+    }
+</script>
+</body>
+</html>

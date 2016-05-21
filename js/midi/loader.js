@@ -1,7 +1,7 @@
 /**
  * Created by chie on 2016/2/26.
  */
-
+var MIDI=require('./midi.js');
 loadMidiFile = function (midiFile, callback) {
     if(midiFile.constructor.toString().indexOf('File')!=-1||midiFile.constructor.toString().indexOf('Blob')!=-1)
     readBlobAsDataURL(midiFile, function (dataurl) {
@@ -9,7 +9,7 @@ loadMidiFile = function (midiFile, callback) {
         loadMidiFile.midiTracks.intoTracks();
         loadMidiFile.midiTracks.intoTemporal();
         //暂时只支持acoustic_grand_piano
-        loadSondFont('acoustic_grand_piano', function () {
+        MIDIPlayer.loadSondFont('acoustic_grand_piano', function () {
             callback(loadMidiFile.midiTracks);
         });
     });
@@ -23,3 +23,5 @@ loadMidiFile = function (midiFile, callback) {
     }
 };
 loadMidiFile.midiTracks={};
+
+module.exports=loadMidiFile;

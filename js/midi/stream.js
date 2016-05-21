@@ -70,3 +70,5 @@ function Stream(str) {
         'readWord':readWord
     }
 }
+
+module.exports=Stream;

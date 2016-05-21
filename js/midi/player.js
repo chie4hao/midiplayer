@@ -2,6 +2,7 @@
  * Created by chie on 2016/4/25.
  */
 
+var MIDISoundFont=require('../soundfont/acoustic_grand_piano-mp3.js');
 
 var MIDIPlayer = function (midiTracks) {
     this.temporal = midiTracks.temporal;
@@ -113,8 +114,8 @@ var ctx = new window.AudioContext();
 var soundFont;
 var audioBuffers = {};
 var soundFontLength, decodeLength;
-MIDI.keyToNote = {}; // C8  == 108
-MIDI.noteToKey = {}; // 108 ==  C8
+var keyToNote = {}; // C8  == 108
+var noteToKey = {}; // 108 ==  C8
 (function () {
     var A0 = 0x15; // first note
     var C8 = 0x6C; // last note
@@ -122,13 +123,13 @@ MIDI.noteToKey = {}; // 108 ==  C8
     for (var n = A0; n <= C8; n++) {
         var octave = (n - 12) / 12 >> 0;
         var name = number2key[n % 12] + octave;
-        MIDI.keyToNote[name] = n;
-        MIDI.noteToKey[n] = name;
+        keyToNote[name] = n;
+        noteToKey[n] = name;
     }
 })();
-function loadSondFont(instrument, callback) {
+MIDIPlayer.loadSondFont=function(instrument, callback) {
     decodeLength = 0;
-    soundFont = MIDI.Soundfont[instrument]
+    soundFont = MIDISoundFont[instrument]
     soundFontLength = Object.keys(soundFont).length;
     for (var index in soundFont) {
         loadAudio(instrument, index, callback);
@@ -140,7 +141,7 @@ function loadAudio(instrument, index, callback) {
         u8arr[n] = bstr.charCodeAt(n);
     }
     ctx.decodeAudioData(buffer, function (buffer1) {
-        buffer1.id = MIDI.keyToNote[index]
+        buffer1.id = keyToNote[index]
         if (buffer1.id) {
             audioBuffers[instrument + ' ' + buffer1.id] = buffer1;
         }
@@ -150,3 +151,5 @@ function loadAudio(instrument, index, callback) {
         }
     })
 }
+
+module.exports=MIDIPlayer;

@@ -2,6 +2,9 @@
  * Created by chie on 2016/4/25.
  */
 
+
+var Stream=require('./stream');
+
 var MIDI = function (dataurl) {
     this.midiDataurl = dataurl;
     this.header={};
@@ -41,7 +44,7 @@ MIDI.prototype = {
             console.log(stream.readWord(4))
             var trackStream = Stream(stream.read(stream.readInt32()));
             while (!trackStream.eof()) {
-                var event = MIDI.readEvent(trackStream);
+                var event = readEvent(trackStream);
                 this.tracks[i].push(event);
             }
         }
@@ -85,9 +88,9 @@ MIDI.prototype = {
 };
 
 
-MIDI.lastEventTypeByte;
+var lastEventTypeByte;
 
-MIDI.readEvent = function (stream) {
+var readEvent = function (stream) {
     var event = {};
     event.deltaTime = stream.readVarInt();
     var eventTypeByte = stream.readInt8();
@@ -208,10 +211,10 @@ MIDI.readEvent = function (stream) {
         if ((eventTypeByte & 0x80) == 0) {
 
             param1 = eventTypeByte;
-            eventTypeByte = MIDI.lastEventTypeByte;
+            eventTypeByte = lastEventTypeByte;
         } else {
             param1 = stream.readInt8();
-            MIDI.lastEventTypeByte = eventTypeByte;
+            lastEventTypeByte = eventTypeByte;
         }
         var eventType = eventTypeByte >> 4;
         event.channel = eventTypeByte & 0x0f;
@@ -258,3 +261,5 @@ MIDI.readEvent = function (stream) {
         }
     }
 }
+
+module.exports=MIDI;
