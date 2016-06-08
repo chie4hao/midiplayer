@@ -6,9 +6,9 @@
 ```javascript
 loadMidiFile(midiFile, function (midiTracks) {
 
-  var asdf = new MIDIPlayer(midiTracks);
+  var player = new MIDIPlayer(midiTracks);
   
-  asdf.sendSignal(0);
+  player.sendSignal(0);
   
 });
 ```
