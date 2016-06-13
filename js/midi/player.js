@@ -2,9 +2,9 @@
  * Created by chie on 2016/4/25.
  */
 
-var MIDISoundFont=require('../soundfont/acoustic_grand_piano-mp3.js');
+const MIDISoundFont = require('../soundfont/acoustic_grand_piano-mp3.js');
 
-var MIDIPlayer = function (midiTracks) {
+let MIDIPlayer = function (midiTracks) {
     this.temporal = midiTracks.temporal;
     this.playTime = ctx.currentTime;
     this.beginTime = this.playTime;
@@ -15,8 +15,8 @@ var MIDIPlayer = function (midiTracks) {
 
 MIDIPlayer.prototype.sendSignal = function (x, y) {
     y = y || 5;
-    var current = this;
-    for (var i = x; i < this.temporal.length && i < x + y; i++) {
+    let current = this;
+    for (let i = x; i < this.temporal.length && i < x + y; i++) {
         switch (this.temporal[i][0].subtype) {
             case 'noteOn':
                 this.noteOn('acoustic_grand_piano', this.temporal[i][0].noteNumber, this.temporal[i][0].velocity, this.temporal[i][1])
@@ -28,7 +28,7 @@ MIDIPlayer.prototype.sendSignal = function (x, y) {
     }
 
     if ((x + y) < this.temporal.length) {
-        var time = (this.temporal[(x + y)][1] - ctx.currentTime + this.beginTime) * 1000 - 500;
+        let time = (this.temporal[(x + y)][1] - ctx.currentTime + this.beginTime) * 1000 - 500;
         this.currentTimeout = setTimeout(function () {
             current.playTime = ctx.currentTime;
             current.sendSignal(x + y, y);
@@ -37,9 +37,9 @@ MIDIPlayer.prototype.sendSignal = function (x, y) {
 }
 
 MIDIPlayer.prototype.noteOn = function (instrument, noteId, velocity, delay) {
-    var source = ctx.createBufferSource();
+    let source = ctx.createBufferSource();
     source.buffer = audioBuffers[instrument + ' ' + noteId];
-    var ouput = ctx.createGain();
+    let ouput = ctx.createGain();
     ouput.connect(ctx.destination);
     ouput.gain.value = Math.min(1.0, Math.max(-1.0, (velocity / 127) * (this.masterVolume / 127)));
     source.gain = ouput;
@@ -68,9 +68,9 @@ MIDIPlayer.prototype.noteOn = function (instrument, noteId, velocity, delay) {
 };
 
 MIDIPlayer.prototype.noteOff = function (instrument, noteId, delay) {
-    var buffer = audioBuffers[instrument + ' ' + noteId];
+    let buffer = audioBuffers[instrument + ' ' + noteId];
     if (buffer) {
-        var source = this.sources[noteId];
+        let source = this.sources[noteId];
         if (source) {
             delay = delay - ctx.currentTime + this.playTime + this.beginTime
 
@@ -79,7 +79,7 @@ MIDIPlayer.prototype.noteOff = function (instrument, noteId, delay) {
                 gain.linearRampToValueAtTime(gain.value, delay);
                 gain.linearRampToValueAtTime(0, delay + 0.3);
             }
-            delete this.sources[noteId];
+            this.sources[noteId] = null;
             return source;
         }
     }
@@ -94,7 +94,7 @@ MIDIPlayer.prototype.stopAllNotes = function () {
             var gain = source.gain.gain;
             gain.linearRampToValueAtTime(gain.value, 0);
             gain.linearRampToValueAtTime(0, 0 + 0.3);
-            delete source;
+            source = null;
         }
     }
 }
@@ -127,7 +127,7 @@ var noteToKey = {}; // 108 ==  C8
         noteToKey[n] = name;
     }
 })();
-MIDIPlayer.loadSondFont=function(instrument, callback) {
+MIDIPlayer.loadSondFont = function (instrument, callback) {
     decodeLength = 0;
     soundFont = MIDISoundFont[instrument]
     soundFontLength = Object.keys(soundFont).length;
@@ -152,4 +152,4 @@ function loadAudio(instrument, index, callback) {
     })
 }
 
-module.exports=MIDIPlayer;
+module.exports = MIDIPlayer;

@@ -8,12 +8,13 @@ var O2jam=function(temporal){
     this.sevenkey = [];
     this.currentSevenKeyPosition = {now: 0, badkey: [0, 0], goodkey: [0, 0], misskey: [0, 0]};
     this.grade = {great: 0, good: 0, bad: 0, miss: 0, combo: 0}
-
 }
+
+
 O2jam.prototype.toSevenkey=function(){
     var animatearray = [];
     var asdf = [0, 1, 2, 3, 4, 5, 6];
-    var currentNoteTime = [-9999, -9999, -9999, -9999, -9999, -9999, -9999];
+    var currentNoteTime = [-Infinity, -Infinity, -Infinity, -Infinity, -Infinity, -Infinity, -Infinity];
     var badTime = 200;
     var maxTime;
     this.temporal.forEach(function (a) {
