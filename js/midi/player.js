@@ -2,7 +2,6 @@
  * Created by chie on 2016/4/25.
  */
 
-const MIDISoundFont = require('../soundfont/acoustic_grand_piano-mp3.js');
 
 let MIDIPlayer = function (midiTracks) {
     this.temporal = midiTracks.temporal;
@@ -87,8 +86,6 @@ MIDIPlayer.prototype.noteOff = function (instrument, noteId, delay) {
 
 MIDIPlayer.prototype.stopAllNotes = function () {
     for (var a in this.sources) {
-        console.log(this.sources)
-        console.log(a)
         var source = this.sources[a];
         if (source && source.gain) {
             var gain = source.gain.gain;
@@ -132,10 +129,39 @@ var noteToKey = {}; // 108 ==  C8
 MIDIPlayer.loadSondFont = function (instrument, callback) {
     instrument = instrument || 'acoustic_grand_piano';
     decodeLength = 0;
-    soundFont = MIDISoundFont[instrument]
-    soundFontLength = Object.keys(soundFont).length;
-    for (var index in soundFont) {
-        loadAudio(instrument, index, callback);
+
+    if (typeof MIDI !== 'undefined' && MIDI.Soundfont[instrument]) { // already loaded
+        console.log('already cached')
+        callback();
+    } else {
+        var xhr = new XMLHttpRequest();
+
+        //自行更改soundfont地址
+        xhr.open('GET', './js/soundfont/' + instrument + '-mp3.js', true);
+        
+        xhr.onreadystatechange = function (evt) {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200 ||
+                    xhr.status === 304 ||    // Not Modified
+                    xhr.status === 308 ||    // Permanent Redirect
+                    xhr.status === 0 && root.client.cordova // Cordova quirk
+                ) {
+                    var script = document.createElement('script');
+                    script.language = 'javascript';
+                    script.type = 'text/javascript';
+                    script.text = evt.target.responseText;
+                    document.body.appendChild(script);
+                    soundFont = MIDI.Soundfont[instrument]
+                    soundFontLength = Object.keys(soundFont).length;
+                    for (var index in soundFont) {
+                        loadAudio(instrument, index, callback);
+                    }
+                } else {
+                    onerror && onerror.call(xhr, evt);
+                }
+            }
+        }
+        xhr.send();
     }
 }
 

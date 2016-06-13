@@ -83,7 +83,6 @@ MIDI.prototype = {
                 }
             } else break;
         }
-        console.log(this.temporal);
     }
 };
 
