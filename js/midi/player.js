@@ -116,6 +116,7 @@ var audioBuffers = {};
 var soundFontLength, decodeLength;
 var keyToNote = {}; // C8  == 108
 var noteToKey = {}; // 108 ==  C8
+
 (function () {
     var A0 = 0x15; // first note
     var C8 = 0x6C; // last note
@@ -127,7 +128,9 @@ var noteToKey = {}; // 108 ==  C8
         noteToKey[n] = name;
     }
 })();
+
 MIDIPlayer.loadSondFont = function (instrument, callback) {
+    instrument = instrument || 'acoustic_grand_piano';
     decodeLength = 0;
     soundFont = MIDISoundFont[instrument]
     soundFontLength = Object.keys(soundFont).length;
@@ -135,6 +138,7 @@ MIDIPlayer.loadSondFont = function (instrument, callback) {
         loadAudio(instrument, index, callback);
     }
 }
+
 function loadAudio(instrument, index, callback) {
     var bstr = atob(soundFont[index].split(',')[1]), n = bstr.length, buffer = new ArrayBuffer(n), u8arr = new Uint8Array(buffer);
     while (n--) {

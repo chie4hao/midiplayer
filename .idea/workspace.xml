@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78c75356-f072-4bdf-8004-a4478ec972eb" name="默认的" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.babelrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gulpfile.babel.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/midi.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/soundfont/acoustic_grand_piano-mp3.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/index.html" afterPath="$PROJECT_DIR$/examples/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/o2jam.html" afterPath="$PROJECT_DIR$/examples/o2jam.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/midi/O2jam.js" afterPath="$PROJECT_DIR$/js/midi/O2jam.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/midi/loader.js" afterPath="$PROJECT_DIR$/js/midi/loader.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/midi.min.js" afterPath="$PROJECT_DIR$/build/midi.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/midi.min.js.map" afterPath="$PROJECT_DIR$/build/midi.min.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/midi/player.js" afterPath="$PROJECT_DIR$/js/midi/player.js" />
     </list>
     <ignored path="midiplayer.iws" />
@@ -54,10 +47,42 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="loader.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/midi/loader.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="304">
+              <caret line="16" column="58" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="player.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/midi/player.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="427">
+              <caret line="134" column="16" selection-start-line="134" selection-start-column="16" selection-end-line="134" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#40#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="acoustic_grand_piano-mp3.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build/soundfont/acoustic_grand_piano-mp3.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194712">
+              <caret line="98" column="30" selection-start-line="98" selection-start-column="30" selection-end-line="98" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="o2jam.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/o2jam.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-95">
+            <state relative-caret-position="133">
               <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
               <folding />
             </state>
@@ -67,7 +92,7 @@
       <file leaf-file-name="midi.min.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build/midi.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195472">
+            <state relative-caret-position="855">
               <caret line="45" column="16" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
               <folding />
             </state>
@@ -84,24 +109,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".babelrc" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.babelrc">
+      <file leaf-file-name="gulpfile.babel.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gulpfile.babel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
-              <folding />
+            <state relative-caret-position="380">
+              <caret line="22" column="50" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
+              <folding>
+                <element signature="e#42#66#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gulpfile.babel.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gulpfile.babel.js">
+      <file leaf-file-name="acoustic_grand_piano-mp3.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/soundfont/acoustic_grand_piano-mp3.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
-              <folding>
-                <element signature="e#42#66#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="264">
+              <caret line="93" column="14790" selection-start-line="93" selection-start-column="14790" selection-end-line="93" selection-end-column="14790" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -141,10 +166,11 @@
         <option value="$PROJECT_DIR$/examples/index.html" />
         <option value="$PROJECT_DIR$/examples/o2jam.html" />
         <option value="$PROJECT_DIR$/.babelrc" />
-        <option value="$PROJECT_DIR$/js/midi/player.js" />
-        <option value="$PROJECT_DIR$/gulpfile.babel.js" />
         <option value="$PROJECT_DIR$/js/midi/loader.js" />
         <option value="$PROJECT_DIR$/build/midi.min.js" />
+        <option value="$PROJECT_DIR$/gulpfile.babel.js" />
+        <option value="$PROJECT_DIR$/build/soundfont/acoustic_grand_piano-mp3.js" />
+        <option value="$PROJECT_DIR$/js/midi/player.js" />
       </list>
     </option>
   </component>
@@ -232,6 +258,10 @@
               <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="soundfont" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -297,6 +327,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="midiplayer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="midiplayer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="soundfont" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -318,6 +366,9 @@
     <property name="js.buildTools.gulp.gulp_package_dir" value="C:\Users\chie\node_modules\gulp" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\chie\Documents\GitHub\midiplayer\build\soundfont" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\chie\WebstormProjects\midiplayer\examples\css" />
       <recent name="C:\Users\chie\WebstormProjects\midiplayer\examples" />
@@ -408,12 +459,12 @@
       <workItem from="1463489082810" duration="20000" />
       <workItem from="1463645540998" duration="819000" />
       <workItem from="1463823672660" duration="8873000" />
-      <workItem from="1465802062070" duration="7204000" />
+      <workItem from="1465802062070" duration="8856000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20224000" />
+    <option name="totallyTimeSpent" value="21876000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -481,13 +532,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/midi/stream.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/soundfont/acoustic_grand_piano-mp3.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -705,14 +749,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bundle.js" />
-    <entry file="file://$PROJECT_DIR$/js/soundfont/acoustic_grand_piano-mp3.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="93" column="14790" selection-start-line="93" selection-start-column="14790" selection-end-line="93" selection-end-column="14790" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/test.html" />
     <entry file="file://$PROJECT_DIR$/examples/css/index.css">
       <provider selected="true" editor-type-id="text-editor">
@@ -787,14 +823,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" column="63" selection-start-line="21" selection-start-column="63" selection-end-line="21" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
@@ -815,34 +843,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build/midi.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195472">
+        <state relative-caret-position="855">
           <caret line="45" column="16" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/midi/player.js">
+    <entry file="file://$PROJECT_DIR$/gulpfile.babel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2337">
-          <caret line="125" column="12" selection-start-line="125" selection-start-column="12" selection-end-line="125" selection-end-column="12" />
+        <state relative-caret-position="380">
+          <caret line="22" column="50" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
           <folding>
-            <element signature="e#0#40#0" expanded="false" />
+            <element signature="e#42#66#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/midi/loader.js">
+    <entry file="file://$PROJECT_DIR$/js/soundfont/acoustic_grand_piano-mp3.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state relative-caret-position="264">
+          <caret line="93" column="14790" selection-start-line="93" selection-start-column="14790" selection-end-line="93" selection-end-column="14790" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/o2jam.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-95">
+        <state relative-caret-position="133">
           <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="21" column="63" selection-start-line="21" selection-start-column="63" selection-end-line="21" selection-end-column="63" />
           <folding />
         </state>
       </provider>
@@ -855,12 +891,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gulpfile.babel.js">
+    <entry file="file://$PROJECT_DIR$/js/midi/loader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+        <state relative-caret-position="304">
+          <caret line="16" column="58" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/soundfont/acoustic_grand_piano-mp3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194712">
+          <caret line="98" column="30" selection-start-line="98" selection-start-column="30" selection-end-line="98" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/midi/player.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="134" column="16" selection-start-line="134" selection-start-column="16" selection-end-line="134" selection-end-column="16" />
           <folding>
-            <element signature="e#42#66#0" expanded="true" />
+            <element signature="e#0#40#0" expanded="false" />
           </folding>
         </state>
       </provider>
