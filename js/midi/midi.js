@@ -3,9 +3,9 @@
  */
 
 
-var Stream=require('./stream');
+const Stream=require('./stream');
 
-var MIDI = function (dataurl) {
+const MIDI = function (dataurl) {
     this.midiDataurl = dataurl;
     this.header={};
     this.tracks = [];
@@ -19,46 +19,46 @@ MIDI.prototype = {
         if (!this.midiDataurl) {
             throw 'midiDateurl is null'
         }
-        var dataurl = atob(this.midiDataurl.split(',')[1]);
-        var n = dataurl.length, u8arr = [];
+        let dataurl = atob(this.midiDataurl.split(',')[1]);
+        let n = dataurl.length, u8arr = [];
         while (n--) {
             u8arr[n] = dataurl.charCodeAt(n);
         }
         /*
-         var n = dataurl.length;
-         var array16 = [];
+         let n = dataurl.length;
+         let array16 = [];
          while (n--) {
          array16[n] = u8arr[n].toString(16);
          }
          */
-        var stream = Stream(u8arr);
+        let stream = Stream(u8arr);
         console.log(stream.readWord(4))
-        var headerStream = Stream(stream.read(stream.readInt32()));
+        let headerStream = Stream(stream.read(stream.readInt32()));
         this.header.formatType = headerStream.readInt16();
         this.header.trackCount = headerStream.readInt16();
         this.header.ticksPerBeat = headerStream.readInt16();
 
         //分轨
-        for (var i = 0; i < this.header.trackCount; i++) {
+        for (let i = 0; i < this.header.trackCount; i++) {
             this.tracks[i] = [];
             console.log(stream.readWord(4))
-            var trackStream = Stream(stream.read(stream.readInt32()));
+            let trackStream = Stream(stream.read(stream.readInt32()));
             while (!trackStream.eof()) {
-                var event = readEvent(trackStream);
+                let event = readEvent(trackStream);
                 this.tracks[i].push(event);
             }
         }
     },
     //转为单轨序列
     intoTemporal: function () {
-        var currentTime = 0;
-        var currentDeltaTime = 0;
-        var minTime = {
+        let currentTime = 0;
+        let currentDeltaTime = 0;
+        let minTime = {
             trackId: 0,
             deltaTime: Infinity
         };
-        var tracksCurrentState = []
-        for (var i = 0; i < this.tracks.length; i++) {
+        let tracksCurrentState = []
+        for (let i = 0; i < this.tracks.length; i++) {
             tracksCurrentState[i] = {
                 position: 0,
                 deltaTime: 0
@@ -66,14 +66,14 @@ MIDI.prototype = {
         }
         while (1) {
             minTime.deltaTime = Infinity;
-            for (var i = 0; i < this.tracks.length; i++) {
+            for (let i = 0; i < this.tracks.length; i++) {
                 if (this.tracks[i][tracksCurrentState[i].position] && this.tracks[i][tracksCurrentState[i].position].deltaTime + tracksCurrentState[i].deltaTime < minTime.deltaTime) {
                     minTime.trackId = i;
                     minTime.deltaTime = this.tracks[i][tracksCurrentState[i].position].deltaTime + tracksCurrentState[i].deltaTime;
                 }
             }
             if (minTime.deltaTime != Infinity) {
-                var nextEvent = this.tracks[minTime.trackId][tracksCurrentState[minTime.trackId].position];
+                let nextEvent = this.tracks[minTime.trackId][tracksCurrentState[minTime.trackId].position];
                 this.temporal.push([nextEvent, currentTime += (minTime.deltaTime - currentDeltaTime) / this.header.ticksPerBeat / (this.beatsPerMinute / 60)]);
                 tracksCurrentState[minTime.trackId].position++;
                 tracksCurrentState[minTime.trackId].deltaTime = minTime.deltaTime;
@@ -87,19 +87,19 @@ MIDI.prototype = {
 };
 
 
-var lastEventTypeByte;
+let lastEventTypeByte;
 
-var readEvent = function (stream) {
-    var event = {};
+const readEvent = function (stream) {
+    let event = {};
     event.deltaTime = stream.readVarInt();
-    var eventTypeByte = stream.readInt8();
+    let eventTypeByte = stream.readInt8();
     if ((eventTypeByte & 0xf0) == 0xf0) {
         /* system / meta event */
         if (eventTypeByte == 0xff) {
             /* meta event */
             event.type = 'meta';
-            var subtypeByte = stream.readInt8();
-            var length = stream.readVarInt();
+            let subtypeByte = stream.readInt8();
+            let length = stream.readVarInt();
             switch (subtypeByte) {
                 case 0x00:
                     event.subtype = 'sequenceNumber';
@@ -155,7 +155,7 @@ var readEvent = function (stream) {
                 case 0x54:
                     event.subtype = 'smpteOffset';
                     if (length != 5) throw "Expected length for smpteOffset event is 5, got " + length;
-                    var hourByte = stream.readInt8();
+                    let hourByte = stream.readInt8();
                     event.frameRate = {
                         0x00: 24, 0x20: 25, 0x40: 29, 0x60: 30
                     }[hourByte & 0x60];
@@ -193,12 +193,12 @@ var readEvent = function (stream) {
             return event;
         } else if (eventTypeByte == 0xf0) {
             event.type = 'sysEx';
-            var length = stream.readVarInt();
+            let length = stream.readVarInt();
             event.data = stream.read(length);
             return event;
         } else if (eventTypeByte == 0xf7) {
             event.type = 'dividedSysEx';
-            var length = stream.readVarInt();
+            let length = stream.readVarInt();
             event.data = stream.read(length);
             return event;
         } else {
@@ -206,7 +206,7 @@ var readEvent = function (stream) {
         }
     } else {
         /* channel event */
-        var param1;
+        let param1;
         if ((eventTypeByte & 0x80) == 0) {
 
             param1 = eventTypeByte;
@@ -215,7 +215,7 @@ var readEvent = function (stream) {
             param1 = stream.readInt8();
             lastEventTypeByte = eventTypeByte;
         }
-        var eventType = eventTypeByte >> 4;
+        let eventType = eventTypeByte >> 4;
         event.channel = eventTypeByte & 0x0f;
         event.type = 'channel';
         switch (eventType) {

@@ -27,6 +27,6 @@ gulp.task('javascript', ()=> {
         .pipe(gulp.dest('./build/'));
 });
 
-gulp.task('default',['javascript'],()=>
-    gulp.watch(['js/**/*.js'],['javascript'])
+gulp.task('default', ['javascript'], ()=>
+    gulp.watch(['js/**/*.js'], ['javascript'])
 )
